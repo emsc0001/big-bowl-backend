@@ -22,5 +22,8 @@ public class BowlingLane {
 
     private boolean isForKids;
 
+    public void setIsForKids(boolean b) {
+        this.isForKids = b;
+    }
 }
 
