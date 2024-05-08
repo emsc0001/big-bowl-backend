@@ -64,7 +64,10 @@ public class UserWithRoles implements UserDetails {
     this.email = email;
   }
 
-  public void setPassword(String pw){
+    public UserWithRoles(String username, String password) {
+    }
+
+    public void setPassword(String pw){
     if(pw.length()<60){
       throw new IllegalArgumentException("Password is not encoded");
     }
