@@ -44,3 +44,5 @@ public class BookingActivity {
     @ManyToOne
     private Booking booking;
 }
+
+
