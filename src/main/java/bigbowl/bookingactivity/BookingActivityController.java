@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/booking-activities")
+@RequestMapping("/booking-activities")
 public class BookingActivityController {
     private final BookingActivityService bookingActivityService;
 
@@ -17,7 +17,7 @@ public class BookingActivityController {
         this.bookingActivityService = bookingActivityService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<BookingActivity>> getAllActivities() {
         List<BookingActivity> activities = bookingActivityService.findAll();
         return ResponseEntity.ok(activities);
