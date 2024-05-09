@@ -19,6 +19,6 @@ public class Activity {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
-    // Constructors (if needed)
+
 }
 
