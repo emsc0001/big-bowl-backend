@@ -1,10 +1,8 @@
 package bigbowl.activity;
 
-public interface ActivityRepository { //repository interface
-    Activity save(Activity activity);
-    Activity findByName(String name);
-    void delete(Activity activity);
-    void update(Activity activity);
-    void deleteAll();
-    Iterable<Activity> findAll();
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ActivityRepository extends JpaRepository<Activity, Long> {
 }

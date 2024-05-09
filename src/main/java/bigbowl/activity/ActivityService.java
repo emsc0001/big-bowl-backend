@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class ActivityService {
     private final ActivityRepository activityRepository;
@@ -13,7 +14,7 @@ public class ActivityService {
     }
 
     public List<Activity> getAllActivities() {
-        return (List<Activity>) activityRepository.findAll();
+        return activityRepository.findAll();
     }
 
     public Activity getActivityById(Long id) {

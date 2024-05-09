@@ -1,5 +1,6 @@
 package bigbowl.booking;
 
+import bigbowl.activity.Activity;
 import bigbowl.bookingactivity.BookingActivity;
 import bigbowl.product.Product;
 import bigbowl.security.entity.UserWithRoles;
@@ -26,6 +27,9 @@ public class Booking {
 
     @ManyToMany
     private List<Product> products;
+
+    @ManyToOne
+    private Activity activity;
 
     // Bruger tilknyttet bookingen
     @ManyToOne
