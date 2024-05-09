@@ -1,5 +1,6 @@
 package bigbowl;
 
+import bigbowl.airhockeytable.AirHockeyTable;
 import bigbowl.airhockeytable.AirHockeyTableRepository;
 import bigbowl.booking.Booking;
 import bigbowl.booking.BookingRepository;
@@ -49,6 +50,8 @@ public class InitData implements CommandLineRunner {
         product1.setName("Product 1");
         product1.setPrice(100.0);
         productRepository.save(product1);
+
+
 
         // Create some bowling lanes
         BowlingLane lane1 = new BowlingLane();

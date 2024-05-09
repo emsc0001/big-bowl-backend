@@ -71,6 +71,18 @@ public class SecurityConfig {
             //Required for error responses
             .requestMatchers(mvcMatcherBuilder.pattern("/error")).permitAll()
 
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/products")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/products/*")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/products")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/products/*")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/products/*")).hasAnyAuthority("ADMIN")
+
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/airHockey")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/airHockey/*")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/airHockey")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/airHockey/*")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/airHockey/*")).hasAnyAuthority("ADMIN")
+
             //This is for demo purposes only, and should be removed for a real system
 //            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/test/user-only")).hasAuthority("USER")
 //            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/test/admin-only")).hasAuthority("ADMIN")
