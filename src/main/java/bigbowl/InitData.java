@@ -6,7 +6,7 @@ import bigbowl.booking.Booking;
 import bigbowl.booking.BookingRepository;
 import bigbowl.bookingactivity.BookingActivity;
 import bigbowl.bookingactivity.BookingActivityRepository;
-import bigbowl.bowlinglane.BowlinLaneRepository;
+import bigbowl.bowlinglane.BowlingLaneRepository;
 import bigbowl.bowlinglane.BowlingLane;
 import bigbowl.dinnertable.DinnerTable;
 import bigbowl.dinnertable.DinnerTableRepository;
@@ -20,7 +20,7 @@ import java.util.Arrays;
 
 @Component
 public class InitData implements CommandLineRunner {
-    private final BowlinLaneRepository bowlingLaneRepository;
+    private final BowlingLaneRepository bowlingLaneRepository;
     private final ProductRepository productRepository;
     private final DinnerTableRepository dinnerTableRepository;
     private final BookingActivityRepository bookingActivityRepository;
@@ -28,7 +28,7 @@ public class InitData implements CommandLineRunner {
     private final BookingRepository bookingRepository;
 
     public InitData(
-            BowlinLaneRepository bowlingLaneRepository,
+            BowlingLaneRepository bowlingLaneRepository,
             ProductRepository productRepository,
             DinnerTableRepository dinnerTableRepository,
             BookingActivityRepository bookingActivityRepository,
@@ -52,12 +52,82 @@ public class InitData implements CommandLineRunner {
         productRepository.save(product1);
 
 
+        // Create some Air Hockey Tables
+        AirHockeyTable airHockey1 = new AirHockeyTable();
+        airHockey1.setTableNumber(1);
+        airHockeyTableRepository.save(airHockey1);
 
-        // Create some bowling lanes
+        AirHockeyTable airHockey2 = new AirHockeyTable();
+        airHockey2.setTableNumber(2);
+        airHockeyTableRepository.save(airHockey2);
+
+        AirHockeyTable airHockey3 = new AirHockeyTable();
+        airHockey3.setTableNumber(3);
+        airHockeyTableRepository.save(airHockey3);
+
+        AirHockeyTable airHockey4 = new AirHockeyTable();
+        airHockey4.setTableNumber(4);
+        airHockeyTableRepository.save(airHockey4);
+
+        AirHockeyTable airHockey5 = new AirHockeyTable();
+        airHockey5.setTableNumber(5);
+        airHockeyTableRepository.save(airHockey5);
+
+        AirHockeyTable airHockey6 = new AirHockeyTable();
+        airHockey6.setTableNumber(6);
+        airHockeyTableRepository.save(airHockey6);
+
+// Create some Bowling Lanes
         BowlingLane lane1 = new BowlingLane();
         lane1.setLaneNumber(1);
-        lane1.setIsForKids(true);
+        lane1.setIsForKids(false);
         bowlingLaneRepository.save(lane1);
+
+        BowlingLane lane2 = new BowlingLane();
+        lane2.setLaneNumber(2);
+        lane2.setIsForKids(false);
+        bowlingLaneRepository.save(lane2);
+
+        BowlingLane lane3 = new BowlingLane();
+        lane3.setLaneNumber(3);
+        lane3.setIsForKids(false);
+        bowlingLaneRepository.save(lane3);
+
+        BowlingLane lane4 = new BowlingLane();
+        lane4.setLaneNumber(4);
+        lane4.setIsForKids(false);
+        bowlingLaneRepository.save(lane4);
+
+        BowlingLane lane5 = new BowlingLane();
+        lane5.setLaneNumber(5);
+        lane5.setIsForKids(false);
+        bowlingLaneRepository.save(lane5);
+
+        BowlingLane lane6 = new BowlingLane();
+        lane6.setLaneNumber(6);
+        lane6.setIsForKids(false);
+        bowlingLaneRepository.save(lane6);
+
+        BowlingLane lane7 = new BowlingLane();
+        lane7.setLaneNumber(7);
+        lane7.setIsForKids(false);
+        bowlingLaneRepository.save(lane7);
+
+        BowlingLane lane8 = new BowlingLane();
+        lane8.setLaneNumber(8);
+        lane8.setIsForKids(true);
+        bowlingLaneRepository.save(lane8);
+
+        BowlingLane lane9 = new BowlingLane();
+        lane9.setLaneNumber(9);
+        lane9.setIsForKids(true);
+        bowlingLaneRepository.save(lane9);
+
+        BowlingLane lane10 = new BowlingLane();
+        lane10.setLaneNumber(10);
+        lane10.setIsForKids(true);
+        bowlingLaneRepository.save(lane10);
+
 
         // Create some dinner tables
         DinnerTable table1 = new DinnerTable();
