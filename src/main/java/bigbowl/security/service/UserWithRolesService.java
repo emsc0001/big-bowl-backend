@@ -13,6 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserWithRolesService {
 
@@ -26,6 +29,13 @@ public class UserWithRolesService {
 
   PasswordEncoder passwordEncoder;
 
+
+  public List<UserWithRolesResponse> getAllUsersWithRoles() {
+    List<UserWithRoles> usersWithRoles = userWithRolesRepository.findAll();
+    return usersWithRoles.stream()
+            .map(UserWithRolesResponse::new)
+            .collect(Collectors.toList());
+  }
 
   @PostConstruct
   public void init(){

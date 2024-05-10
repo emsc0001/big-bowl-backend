@@ -28,7 +28,7 @@ import java.util.Set;
 public class UserWithRoles implements UserDetails {
 
   @Transient
-  static final int PASSWORD_MIN_LENGTH = 60;  // BCrypt encoded passwords always have length 60
+  static final int PASSWORD_MIN_LENGTH = 60;
 
   @Id
   @Column(nullable = false,length = 50,unique = true)
@@ -38,6 +38,7 @@ public class UserWithRoles implements UserDetails {
   String email;
 
   //60 = length of a bcrypt encoded password
+  @Setter
   @Column(nullable = false, length = 60)
   String password;
 
@@ -64,14 +65,7 @@ public class UserWithRoles implements UserDetails {
     this.email = email;
   }
 
-    public UserWithRoles(String username, String password) {
-    }
-
-    public void setPassword(String pw){
-    if(pw.length()<60){
-      throw new IllegalArgumentException("Password is not encoded");
-    }
-    this.password = pw;
+  public UserWithRoles(String username, String password) {
   }
 
   @Override
@@ -92,8 +86,6 @@ public class UserWithRoles implements UserDetails {
     }
   }
 
-
-  //You can, but are NOT expected to use the fields below
   @Override
   public boolean isAccountNonExpired() {return enabled;}
 

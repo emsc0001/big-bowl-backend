@@ -2,8 +2,12 @@ package bigbowl.security.api;
 
 import bigbowl.security.dto.LoginRequest;
 import bigbowl.security.dto.LoginResponse;
+import bigbowl.security.dto.OpretRequest;
+import bigbowl.security.dto.OpretResponse;
+import bigbowl.security.entity.Role;
 import bigbowl.security.entity.UserWithRoles;
 import bigbowl.security.service.UserDetailsServiceImp;
+import bigbowl.security.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -15,6 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -42,12 +47,48 @@ public class AuthenticationController {
 
   private AuthenticationManager authenticationManager;
 
+  UserService userService;
+
   JwtEncoder encoder;
 
-  public AuthenticationController(AuthenticationConfiguration authenticationConfiguration, JwtEncoder encoder) throws Exception {
+  PasswordEncoder passwordEncoder;
+
+
+  public AuthenticationController(AuthenticationConfiguration authenticationConfiguration, JwtEncoder encoder,PasswordEncoder passwordEncoder ) throws Exception {
     this.authenticationManager = authenticationConfiguration.getAuthenticationManager();
     this.encoder = encoder;
+    this.passwordEncoder = passwordEncoder;
+
   }
+
+  @PostMapping("opret")
+  @Operation(summary = "Opret", description = "Use this to create a new user")
+  public ResponseEntity<OpretResponse> opret(@RequestBody OpretRequest request) {
+    try {
+      // Create the user and set the password
+      UserWithRoles userWithRoles = new UserWithRoles();
+      userWithRoles.setUsername(request.getUsername());
+
+      // Encode the password
+      String encodedPassword = passwordEncoder.encode(request.getPassword());
+      userWithRoles.setPassword(encodedPassword);
+
+      // Assign a default role
+      Role defaultRole = new Role("ROLE_USER");
+      userWithRoles.addRole(defaultRole);
+
+      // Save the user using your service
+      userService.createUser(userWithRoles);
+
+      // Construct the response object
+      OpretResponse response = new OpretResponse(userWithRoles.getUsername(), userWithRoles.getPassword());
+
+      return ResponseEntity.ok().body(response);
+    } catch (Exception e) {
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error creating user", e);
+    }
+  }
+
 
   @PostMapping("login")
   @Operation(summary = "Login", description = "Use this to login and get a token")
@@ -55,7 +96,6 @@ public class AuthenticationController {
 
     try {
       UsernamePasswordAuthenticationToken uat = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
-      //The authenticate method will use the loadUserByUsername method in UserDetailsServiceImp
       Authentication authentication = authenticationManager.authenticate(uat);
 
       UserWithRoles user = (UserWithRoles) authentication.getPrincipal();
@@ -66,7 +106,7 @@ public class AuthenticationController {
               .collect(joining(" "));
 
       JwtClaimsSet claims = JwtClaimsSet.builder()
-              .issuer(tokenIssuer)  //Only this for simplicity
+              .issuer(tokenIssuer)
               .issuedAt(now)
               .expiresAt(now.plusSeconds(tokenExpiration))
               .subject(user.getUsername())
@@ -79,7 +119,6 @@ public class AuthenticationController {
               .body(new LoginResponse(user.getUsername(), token, roles));
 
     } catch (BadCredentialsException | AuthenticationServiceException e) {
-      // AuthenticationServiceException is thrown if the user is not found
       throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, UserDetailsServiceImp.WRONG_USERNAME_OR_PASSWORD);
     }
   }
