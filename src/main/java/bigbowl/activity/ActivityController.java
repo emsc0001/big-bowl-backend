@@ -1,5 +1,7 @@
-package bigbowl.activity;
+package bigbowl.api;
 
+import bigbowl.activity.Activity;
+import bigbowl.activity.ActivityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +19,8 @@ public class ActivityController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Activity>> getAllActivities() {
-        List<Activity> activities = activityService.getAllActivities();
-        return ResponseEntity.ok(activities);
+    public List<Activity> getAllActivities() {
+        return activityService.getAllActivities();
     }
 
     @GetMapping("/{id}")
@@ -48,4 +49,5 @@ public class ActivityController {
         return ResponseEntity.noContent().build();
     }
 }
+
 

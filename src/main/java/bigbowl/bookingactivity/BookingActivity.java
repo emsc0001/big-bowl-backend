@@ -1,5 +1,6 @@
 package bigbowl.bookingactivity;
 
+import bigbowl.activity.Activity;
 import bigbowl.airhockeytable.AirHockeyTable;
 import bigbowl.booking.Booking;
 import bigbowl.bowlinglane.BowlingLane;
@@ -31,6 +32,9 @@ public class BookingActivity {
     // Liste over bowlingbaner tilknyttet aktiviteten
     @ManyToMany
     private List<BowlingLane> bowlingLanes;
+
+    @ManyToOne
+    private Activity activity;
 
     // Liste over air-hockey borde tilknyttet aktiviteten
     @ManyToMany
