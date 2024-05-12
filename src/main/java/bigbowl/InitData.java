@@ -133,6 +133,23 @@ public class InitData implements CommandLineRunner {
         DinnerTable table1 = new DinnerTable();
         table1.setTableNumber(1);
         dinnerTableRepository.save(table1);
+
+        DinnerTable table2 = new DinnerTable();
+        table2.setTableNumber(2);
+        dinnerTableRepository.save(table2);
+
+        DinnerTable table3 = new DinnerTable();
+        table3.setTableNumber(3);
+        dinnerTableRepository.save(table3);
+
+
+        DinnerTable table4 = new DinnerTable();
+        table4.setTableNumber(4);
+        dinnerTableRepository.save(table4);
+
+        DinnerTable table5 = new DinnerTable();
+        table5.setTableNumber(5);
+        dinnerTableRepository.save(table5);
 /*
         // Create a new booking activity
         BookingActivity activity1 = new BookingActivity();
