@@ -89,18 +89,18 @@ public class SecurityConfig {
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PATCH, "/DinnerTable/*")).hasAnyAuthority("ADMIN")
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/DinnerTable/*")).hasAnyAuthority("ADMIN")
 
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/sal")).permitAll()
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/sal/*")).permitAll()
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/sal")).hasAnyAuthority("ADMIN")
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/sal/*")).hasAnyAuthority("ADMIN")
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/sal/*")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/AirHockeyTables")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/AirHockeyTables/*")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/AirHockeyTables")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/AirHockeyTables/*")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/AirHockeyTables/*")).hasAnyAuthority("ADMIN")
 
 
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/forestilling")).permitAll()
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/forestilling/*")).permitAll()
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/forestilling")).hasAnyAuthority("ADMIN")
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/forestilling/*")).hasAnyAuthority("ADMIN")
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/forestilling/*")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/booking-activities")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/booking-activities/*")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/booking-activities")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/booking-activities/*")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/booking-activities/*")).hasAnyAuthority("ADMIN")
 
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/bestilling")).permitAll()
 
