@@ -2,6 +2,8 @@ package bigbowl.product;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
     private final ProductRepository repository;
@@ -26,8 +28,9 @@ public class ProductService {
         return repository.findById(Math.toIntExact(id)).orElse(null);
     }
 
-    public Iterable<Product> findAll() {
+    public List<Product> findAll() {
         return repository.findAll();
     }
 
 }
+
