@@ -3,6 +3,8 @@ package bigbowl.product;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -13,7 +15,7 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public Iterable<Product> getAllProducts() {
+    public List<Product> getAllProducts() {
         return productService.findAll();
     }
 
@@ -23,12 +25,12 @@ public class ProductController {
     }
 
     @PostMapping("")
-    public Product createProduct(Product product) {
+    public Product createProduct(@RequestBody Product product) {
         return productService.saveOrUpdate(product);
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, Product product) {
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
         product.setId(id);
         return productService.saveOrUpdate(product);
     }
