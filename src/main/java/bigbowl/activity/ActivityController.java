@@ -2,6 +2,7 @@ package bigbowl.api;
 
 import bigbowl.activity.Activity;
 import bigbowl.activity.ActivityService;
+import bigbowl.activity.ActivityType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,11 @@ public class ActivityController {
     public ResponseEntity<Void> deleteActivity(@PathVariable Long id) {
         activityService.deleteActivity(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/type/{activityType}")
+    public List<Activity> getActivitiesByType(@PathVariable ActivityType activityType) {
+        return activityService.getActivitiesByType(activityType);
     }
 }
 

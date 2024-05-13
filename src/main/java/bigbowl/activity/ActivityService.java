@@ -42,5 +42,9 @@ public class ActivityService {
         Optional<Activity> activityOptional = activityRepository.findById(id);
         activityOptional.ifPresent(activityRepository::delete);
     }
+
+    public List<Activity> getActivitiesByType(ActivityType activityType) {
+        return activityRepository.findByActivityType(activityType);
+    }
 }
 
