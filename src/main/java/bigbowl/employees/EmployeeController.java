@@ -4,16 +4,18 @@ import bigbowl.employees.Employee;
 import bigbowl.employees.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final Logger logger = Logger.getLogger(EmployeeController.class.getName());
 
     @Autowired
     public EmployeeController(EmployeeService employeeService) {
@@ -21,37 +23,41 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> employees = employeeService.getAllEmployees();
-        return ResponseEntity.ok(employees);
+    public List<Employee> getAllEmployees() {
+        logger.info("Request to fetch all employees");
+        return employeeService.getAllEmployees();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+    public Employee getEmployeeById(@PathVariable Long id) {
         Employee employee = employeeService.getEmployeeById(id);
-        return employee != null
-                ? ResponseEntity.ok(employee)
-                : ResponseEntity.notFound().build();
+        if (employee == null) {
+            logger.warning("Failed to find employee with ID: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found");
+        }
+        return employee;
     }
 
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        Employee createdEmployee = employeeService.createEmployee(employee);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdEmployee);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Employee createEmployee(@RequestBody Employee employee) {
+        return employeeService.createOrUpdateEmployee(employee);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        if (employee == null || id == null) {
+            logger.warning("Attempt to update employee without valid data");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid employee data");
+        }
         employee.setId(id);
-        Employee updatedEmployee = employeeService.updateEmployee(employee);
-        return ResponseEntity.ok(updatedEmployee);
+        return employeeService.createOrUpdateEmployee(employee);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
-        return ResponseEntity.noContent().build();
+        logger.info("Deleted employee with ID: " + id);
     }
 }
-
-

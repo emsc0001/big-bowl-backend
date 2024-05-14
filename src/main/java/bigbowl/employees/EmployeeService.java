@@ -1,16 +1,22 @@
 package bigbowl.employees;
 
-import bigbowl.employees.Employee;
-import bigbowl.employees.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class EmployeeService {
+    private static final Date MORNING_SHIFT_START = new GregorianCalendar(0,0,0, 9, 0).getTime();
+    private static final Date MORNING_SHIFT_END = new GregorianCalendar(0,0,0, 16, 0).getTime();
+    private static final Date EVENING_SHIFT_START = new GregorianCalendar(0,0,0, 16, 0).getTime();
+    private static final Date EVENING_SHIFT_END = new GregorianCalendar(0,0,0, 24, 0).getTime();
 
     private final EmployeeRepository employeeRepository;
+    private final Logger logger = Logger.getLogger(EmployeeService.class.getName());
 
     @Autowired
     public EmployeeService(EmployeeRepository employeeRepository) {
@@ -22,20 +28,32 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id).orElse(null);
+        return employeeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Employee not found"));
     }
 
-    public Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
-    }
-
-    public Employee updateEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    @Transactional
+    public Employee createOrUpdateEmployee(Employee employee) {
+        setShiftTimes(employee);
+        Employee savedEmployee = employeeRepository.save(employee);
+        logger.info("Saved employee: " + savedEmployee.getId());
+        return savedEmployee;
     }
 
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
+        logger.info("Deleted employee: " + id);
+    }
+
+    private void setShiftTimes(Employee employee) {
+        if ("MORNING".equals(employee.getShift())) {
+            employee.setShiftStart(MORNING_SHIFT_START);
+            employee.setShiftEnd(MORNING_SHIFT_END);
+        } else if ("EVENING".equals(employee.getShift())) {
+            employee.setShiftStart(EVENING_SHIFT_START);
+            employee.setShiftEnd(EVENING_SHIFT_END);
+        } else {
+            throw new IllegalArgumentException("Invalid shift: " + employee.getShift());
+        }
+        logger.fine("Shift times set for employee: " + employee.getId());
     }
 }
-
-

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -33,11 +35,34 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private ShiftType shift;
 
+
+    @Temporal(TemporalType.TIME)
+    private Date shiftStart;
+
+    @Temporal(TemporalType.TIME)
+    private Date shiftEnd;
+
     public ShiftType getShift() {
         return shift;
     }
 
     public void setShift(ShiftType shift) {
         this.shift = shift;
+    }
+
+    public Date getShiftStart() {
+        return shiftStart;
+    }
+
+    public void setShiftStart(Date shiftStart) {
+        this.shiftStart = shiftStart;
+    }
+
+    public Date getShiftEnd() {
+        return shiftEnd;
+    }
+
+    public void setShiftEnd(Date shiftEnd) {
+        this.shiftEnd = shiftEnd;
     }
 }

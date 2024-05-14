@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Calendar;
 
 @Component
 public class InitData implements CommandLineRunner {
@@ -49,6 +50,29 @@ public class InitData implements CommandLineRunner {
         this.bookingRepository = bookingRepository;
     }
 
+    private void setupShiftTimes(Employee employee, Employee.ShiftType shiftType) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        if (shiftType == Employee.ShiftType.MORNING) {
+            cal.set(Calendar.HOUR_OF_DAY, 9);
+            cal.set(Calendar.MINUTE, 0);
+            employee.setShiftStart(cal.getTime());
+
+            cal.set(Calendar.HOUR_OF_DAY, 16);
+            cal.set(Calendar.MINUTE, 0);
+            employee.setShiftEnd(cal.getTime());
+        } else if (shiftType == Employee.ShiftType.EVENING) {
+            cal.set(Calendar.HOUR_OF_DAY, 16);
+            cal.set(Calendar.MINUTE, 0);
+            employee.setShiftStart(cal.getTime());
+
+            cal.set(Calendar.HOUR_OF_DAY, 24);
+            cal.set(Calendar.MINUTE, 0);
+            employee.setShiftEnd(cal.getTime());
+        }
+    }
     @Override
     public void run(String... args) throws Exception {
         // Create some products
@@ -63,6 +87,7 @@ public class InitData implements CommandLineRunner {
         employee1.setEmail("bellingoal@gmail.com");
         employee1.setPhone("12345678");
         employee1.setShift(Employee.ShiftType.MORNING);
+        setupShiftTimes(employee1, Employee.ShiftType.MORNING);
         employeeRepository.save(employee1);
 
         Employee employee2 = new Employee();
@@ -71,6 +96,7 @@ public class InitData implements CommandLineRunner {
         employee2.setEmail("mbappe@gmail.com");
         employee2.setPhone("22222222");
         employee2.setShift(Employee.ShiftType.EVENING);
+        setupShiftTimes(employee2, Employee.ShiftType.EVENING);
         employeeRepository.save(employee2);
 
 
@@ -81,6 +107,7 @@ public class InitData implements CommandLineRunner {
         employee3.setEmail("messi@gmail.com");
         employee3.setPhone("33333333");
         employee3.setShift(Employee.ShiftType.MORNING);
+        setupShiftTimes(employee3, Employee.ShiftType.MORNING);
         employeeRepository.save(employee3);
 
         Employee employee4 = new Employee();
@@ -89,6 +116,7 @@ public class InitData implements CommandLineRunner {
         employee4.setEmail("ronaldo@gmail.com");
         employee4.setPhone("44444444");
         employee4.setShift(Employee.ShiftType.MORNING);
+        setupShiftTimes(employee4, Employee.ShiftType.MORNING);
         employeeRepository.save(employee4);
 
         Employee employee5 = new Employee();
@@ -97,6 +125,7 @@ public class InitData implements CommandLineRunner {
         employee5.setEmail("neymar@gmail.com");
         employee5.setPhone("55555555");
         employee5.setShift(Employee.ShiftType.EVENING);
+        setupShiftTimes(employee5, Employee.ShiftType.EVENING);
         employeeRepository.save(employee5);
 
         Employee employee6 = new Employee();
@@ -105,6 +134,7 @@ public class InitData implements CommandLineRunner {
         employee6.setEmail("hazard@gmail.com");
         employee6.setPhone("66666666");
         employee6.setShift(Employee.ShiftType.EVENING);
+        setupShiftTimes(employee5, Employee.ShiftType.EVENING);
         employeeRepository.save(employee6);
 
 // Equipment Operators (Total 2)
@@ -114,6 +144,7 @@ public class InitData implements CommandLineRunner {
         employee7.setEmail("debruyne@gmail.com");
         employee7.setPhone("77777777");
         employee7.setShift(Employee.ShiftType.MORNING);
+        setupShiftTimes(employee7, Employee.ShiftType.MORNING);
         employeeRepository.save(employee7);
 
         Employee employee8 = new Employee();
@@ -122,6 +153,7 @@ public class InitData implements CommandLineRunner {
         employee8.setEmail("haaland@gmail.com");
         employee8.setPhone("88888888");
         employee8.setShift(Employee.ShiftType.EVENING);
+        setupShiftTimes(employee8, Employee.ShiftType.EVENING);
         employeeRepository.save(employee8);
 
 // Cleaning Staff (Total 4)
@@ -131,6 +163,7 @@ public class InitData implements CommandLineRunner {
         employee9.setEmail("lewandowski@gmail.com");
         employee9.setPhone("99999999");
         employee9.setShift(Employee.ShiftType.MORNING);
+        setupShiftTimes(employee9, Employee.ShiftType.MORNING);
         employeeRepository.save(employee9);
 
         Employee employee10 = new Employee();
@@ -139,6 +172,7 @@ public class InitData implements CommandLineRunner {
         employee10.setEmail("vandijk@gmail.com");
         employee10.setPhone("10101010");
         employee10.setShift(Employee.ShiftType.MORNING);
+        setupShiftTimes(employee10, Employee.ShiftType.MORNING);
         employeeRepository.save(employee10);
 
         Employee employee11 = new Employee();
@@ -147,6 +181,7 @@ public class InitData implements CommandLineRunner {
         employee11.setEmail("salah@gmail.com");
         employee11.setPhone("11111111");
         employee11.setShift(Employee.ShiftType.EVENING);
+        setupShiftTimes(employee11, Employee.ShiftType.EVENING);
         employeeRepository.save(employee11);
 
         Employee employee12 = new Employee();
@@ -155,6 +190,7 @@ public class InitData implements CommandLineRunner {
         employee12.setEmail("mane@gmail.com");
         employee12.setPhone("12121212");
         employee12.setShift(Employee.ShiftType.EVENING);
+        setupShiftTimes(employee12, Employee.ShiftType.EVENING);
         employeeRepository.save(employee12);
 
         // Create some Air Hockey Tables
@@ -276,6 +312,10 @@ public class InitData implements CommandLineRunner {
 
         bookingRepository.save(booking1);
 
+
+
  */
+
+
     }
 }
