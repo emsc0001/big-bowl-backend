@@ -26,5 +26,18 @@ public class Employee {
     private String email;
     private String phone;
 
-}
+    public enum ShiftType {
+        MORNING, EVENING
+    }
 
+    @Enumerated(EnumType.STRING)
+    private ShiftType shift;
+
+    public ShiftType getShift() {
+        return shift;
+    }
+
+    public void setShift(ShiftType shift) {
+        this.shift = shift;
+    }
+}
