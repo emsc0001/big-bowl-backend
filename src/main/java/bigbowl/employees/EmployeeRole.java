@@ -1,4 +1,8 @@
 package bigbowl.employees;
 
-public class EmployeeRole {
+public enum EmployeeRole {
+    TICKET_SELLER,
+    EQUIPMENT_OPERATOR,
+    MANAGER,
+    CLEANING_STAFF
 }
