@@ -60,16 +60,16 @@ public class InitData implements CommandLineRunner {
             cal.set(Calendar.MINUTE, 0);
             employee.setShiftStart(cal.getTime());
 
-            cal.set(Calendar.HOUR_OF_DAY, 16);
-            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.HOUR_OF_DAY, 15);
+            cal.set(Calendar.MINUTE, 59);
             employee.setShiftEnd(cal.getTime());
         } else if (shiftType == Employee.ShiftType.EVENING) {
             cal.set(Calendar.HOUR_OF_DAY, 16);
             cal.set(Calendar.MINUTE, 0);
             employee.setShiftStart(cal.getTime());
 
-            cal.set(Calendar.HOUR_OF_DAY, 24);
-            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.HOUR_OF_DAY, 23);
+            cal.set(Calendar.MINUTE, 59);
             employee.setShiftEnd(cal.getTime());
         }
     }
