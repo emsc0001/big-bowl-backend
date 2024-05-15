@@ -32,6 +32,8 @@ public class Employee {
         MORNING, EVENING
     }
 
+
+
     @Enumerated(EnumType.STRING)
     private ShiftType shift;
 

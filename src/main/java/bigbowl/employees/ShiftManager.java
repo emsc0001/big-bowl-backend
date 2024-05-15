@@ -2,6 +2,7 @@ package bigbowl.employees;
 
 import bigbowl.employees.Employee;
 import bigbowl.employees.EmployeeRole;
+import bigbowl.employees.ShiftType;
 import java.util.*;
 import java.util.stream.Collectors;
 

@@ -44,10 +44,10 @@ public class EmployeeService {
     }
 
     private void setShiftTimes(Employee employee) {
-        if ("MORNING".equals(employee.getShift())) {
+        if (Employee.ShiftType.MORNING.equals(employee.getShift())) {
             employee.setShiftStart(MORNING_SHIFT_START);
             employee.setShiftEnd(MORNING_SHIFT_END);
-        } else if ("EVENING".equals(employee.getShift())) {
+        } else if (Employee.ShiftType.EVENING.equals(employee.getShift())) {
             employee.setShiftStart(EVENING_SHIFT_START);
             employee.setShiftEnd(EVENING_SHIFT_END);
         } else {
