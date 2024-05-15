@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 @Service
 public class EmployeeService {
     private static final Date MORNING_SHIFT_START = new GregorianCalendar(0,0,0, 9, 0).getTime();
-    private static final Date MORNING_SHIFT_END = new GregorianCalendar(0,0,0, 15, 59).getTime();
+    private static final Date MORNING_SHIFT_END = new GregorianCalendar(0,0,0, 16, 0).getTime();
     private static final Date EVENING_SHIFT_START = new GregorianCalendar(0,0,0, 16, 0).getTime();
     private static final Date EVENING_SHIFT_END = new GregorianCalendar(0,0,0, 23, 59).getTime();
     private final EmployeeRepository employeeRepository;
