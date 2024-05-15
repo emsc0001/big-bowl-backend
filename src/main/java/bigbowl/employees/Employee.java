@@ -20,9 +20,5 @@ public class Employee {
     private String email;
     private String phone;
 
-    // Getters and setters
-    // Constructor(s)
-
-    // Getters and setters for all fields
 }
 
