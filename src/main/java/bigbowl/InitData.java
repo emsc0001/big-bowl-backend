@@ -34,7 +34,6 @@ public class InitData implements CommandLineRunner {
             BookingActivityRepository bookingActivityRepository,
             AirHockeyTableRepository airHockeyTableRepository,
             BookingRepository bookingRepository
-
     ) {
         this.bowlingLaneRepository = bowlingLaneRepository;
         this.productRepository = productRepository;
@@ -151,9 +150,6 @@ public class InitData implements CommandLineRunner {
         DinnerTable table5 = new DinnerTable();
         table5.setTableNumber(5);
         dinnerTableRepository.save(table5);
-
-
-
 /*
         // Create a new booking activity
         BookingActivity activity1 = new BookingActivity();

@@ -16,6 +16,13 @@ public class Employee {
 
     @Enumerated(EnumType.STRING)
     private EmployeeRole role;
-}
 
+    private String email;
+    private String phone;
+
+    // Getters and setters
+    // Constructor(s)
+
+    // Getters and setters for all fields
+}
 
