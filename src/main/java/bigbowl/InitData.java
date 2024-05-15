@@ -10,7 +10,6 @@ import bigbowl.bowlinglane.BowlingLaneRepository;
 import bigbowl.bowlinglane.BowlingLane;
 import bigbowl.dinnertable.DinnerTable;
 import bigbowl.dinnertable.DinnerTableRepository;
-import bigbowl.employees.Employee;
 import bigbowl.product.Product;
 import bigbowl.product.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -153,10 +152,6 @@ public class InitData implements CommandLineRunner {
         table5.setTableNumber(5);
         dinnerTableRepository.save(table5);
 
-        // create employees and roles for the employees
-        Employee employee1 = new Employee();
-        employee1.setName("John Doe");
-        employee1.setRole(EmployeeRole.MANAGER);
 
 
 /*
