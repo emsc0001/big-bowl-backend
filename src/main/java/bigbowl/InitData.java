@@ -83,11 +83,11 @@ public class InitData implements CommandLineRunner {
 
         // Create some equipments
         Equipment equipment1 = new Equipment();
-        equipment1.setName("Equipment 1");
+        equipment1.setName("Bowling Sko");
         equipmentRepository.save(equipment1);
 
         Equipment equipment2 = new Equipment();
-        equipment2.setName("Equipment 2");
+        equipment2.setName("Ice Hockey Stave");
         equipmentRepository.save(equipment2);
 
         // Create some products
