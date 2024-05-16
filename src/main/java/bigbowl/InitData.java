@@ -75,6 +75,18 @@ public class InitData implements CommandLineRunner {
     }
     @Override
     public void run(String... args) throws Exception {
+
+        // Create some equipments
+        Product equipment1 = new Product();
+        equipment1.setName("Shoes");
+        equipment1.setPrice(100.0);
+        productRepository.save(equipment1);
+
+        Product equipment2 = new Product();
+        equipment2.setName("Bowling Ball");
+        equipment2.setPrice(50.0);
+        productRepository.save(equipment2);
+
         // Create some products
         Product product1 = new Product();
         product1.setName("Product 1");
