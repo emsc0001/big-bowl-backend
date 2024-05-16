@@ -3,6 +3,7 @@ package bigbowl.booking;
 import bigbowl.bookingactivity.BookingActivity;
 import bigbowl.product.Product;
 import bigbowl.security.entity.UserWithRoles;
+import bigbowl.security_demo.entity.SpecialUser;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,6 +30,6 @@ public class Booking {
 
     // Bruger tilknyttet bookingen
     @ManyToOne
-    private UserWithRoles user;
+    private SpecialUser user;
 
 }
