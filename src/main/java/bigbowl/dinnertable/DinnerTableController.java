@@ -1,7 +1,11 @@
 package bigbowl.dinnertable;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/DinnerTable")
@@ -36,5 +40,12 @@ public class DinnerTableController {
     @DeleteMapping("/{id}")
     public void deleteDinnerTable(@PathVariable Long id) {
         dinnerTableService.deleteDinnerTable(id);
+    }
+
+    @GetMapping("/available")
+    public List<DinnerTable> getAvailableDinnerTables(
+            @RequestParam("startTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
+            @RequestParam("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
+        return dinnerTableService.findAvailableDinnerTables(startTime, endTime);
     }
 }

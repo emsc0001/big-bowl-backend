@@ -54,6 +54,8 @@ public class SecurityConfig {
     http.authorizeHttpRequests((authorize) -> authorize
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/auth/login")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/user-with-role")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/*")).permitAll()
+
 
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/demo/anonymous")).permitAll()
 
@@ -98,8 +100,8 @@ public class SecurityConfig {
 
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/booking-activities")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/booking-activities/*")).permitAll()
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/booking-activities")).hasAnyAuthority("ADMIN")
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/booking-activities/*")).hasAnyAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/booking-activities")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/booking-activities/*")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/booking-activities/*")).hasAnyAuthority("ADMIN")
 
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/bestilling")).permitAll()

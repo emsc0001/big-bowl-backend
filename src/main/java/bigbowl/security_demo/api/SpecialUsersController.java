@@ -2,6 +2,7 @@ package bigbowl.security_demo.api;
 
 import bigbowl.security.entity.Role;
 import bigbowl.security.repository.RoleRepository;
+import bigbowl.security_demo.dto.GetUserDtoResponse;
 import bigbowl.security_demo.entity.SpecialUser;
 import bigbowl.security_demo.repository.SpecialUserRepository;
 import org.slf4j.Logger;
@@ -29,6 +30,18 @@ public class SpecialUsersController {
         this.specialUserRepository = specialUserRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
+    }
+
+    @GetMapping("{username}")
+    public ResponseEntity<GetUserDtoResponse> getSpecialUser(@PathVariable String username) {
+        logger.info("Fetching user with username: " + username);
+        SpecialUser specialUser = specialUserRepository.findByUsernameIgnoreCase(username);
+        if (specialUser == null) {
+            logger.warn("User not found: " + username);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        logger.info("User found: " + specialUser.getUsername());
+        return ResponseEntity.ok(new GetUserDtoResponse(specialUser.getUsername(), specialUser.getEmail(), specialUser.getFirstName(), specialUser.getLastName(), specialUser.getAddress(), specialUser.getCity(), specialUser.getZipCode()));
     }
 
 

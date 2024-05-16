@@ -29,6 +29,8 @@ public class BookingActivityService {
         }
     }
 
+    
+
     @Transactional
     public void deleteById(Long id) {
         repository.deleteById(Math.toIntExact(id));
