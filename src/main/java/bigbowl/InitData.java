@@ -13,10 +13,12 @@ import bigbowl.dinnertable.DinnerTableRepository;
 import bigbowl.employees.Employee;
 import bigbowl.employees.EmployeeRepository;
 import bigbowl.employees.EmployeeRole;
+import bigbowl.equipment.Equipment;
 import bigbowl.product.Product;
 import bigbowl.product.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import bigbowl.equipment.EquipmentRepository;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -31,6 +33,7 @@ public class InitData implements CommandLineRunner {
     private final BookingActivityRepository bookingActivityRepository;
     private final AirHockeyTableRepository airHockeyTableRepository;
     private final BookingRepository bookingRepository;
+    private final EquipmentRepository equipmentRepository;
 
     public InitData(
             BowlingLaneRepository bowlingLaneRepository,
@@ -39,7 +42,8 @@ public class InitData implements CommandLineRunner {
             BookingActivityRepository bookingActivityRepository,
             AirHockeyTableRepository airHockeyTableRepository,
             BookingRepository bookingRepository,
-            EmployeeRepository employeeRepository
+            EmployeeRepository employeeRepository,
+            EquipmentRepository equipmentRepository
     ) {
         this.bowlingLaneRepository = bowlingLaneRepository;
         this.productRepository = productRepository;
@@ -48,6 +52,7 @@ public class InitData implements CommandLineRunner {
         this.bookingActivityRepository = bookingActivityRepository;
         this.airHockeyTableRepository = airHockeyTableRepository;
         this.bookingRepository = bookingRepository;
+        this.equipmentRepository = equipmentRepository;
     }
 
     private void setupShiftTimes(Employee employee, Employee.ShiftType shiftType) {
@@ -77,15 +82,13 @@ public class InitData implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // Create some equipments
-        Product equipment1 = new Product();
-        equipment1.setName("Shoes");
-        equipment1.setPrice(100.0);
-        productRepository.save(equipment1);
+        Equipment equipment1 = new Equipment();
+        equipment1.setName("Equipment 1");
+        equipmentRepository.save(equipment1);
 
-        Product equipment2 = new Product();
-        equipment2.setName("Bowling Ball");
-        equipment2.setPrice(50.0);
-        productRepository.save(equipment2);
+        Equipment equipment2 = new Equipment();
+        equipment2.setName("Equipment 2");
+        equipmentRepository.save(equipment2);
 
         // Create some products
         Product product1 = new Product();
