@@ -21,6 +21,10 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Bruger tilknyttet bookingen
+    @ManyToOne
+    private SpecialUser user;
+
     // Liste over bookingaktiviteter tilknyttet bookingen
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookingActivity> activities;
@@ -28,8 +32,14 @@ public class Booking {
     @ManyToMany
     private List<Product> products;
 
-    // Bruger tilknyttet bookingen
-    @ManyToOne
-    private SpecialUser user;
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id=" + id +
+                ", user=" + user +
+                ", activities=" + activities +
+                ", products=" + products +
+                '}';
+    }
 
 }

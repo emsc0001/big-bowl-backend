@@ -23,7 +23,8 @@ public class BookingController {
     }
 
     @PostMapping
-    public Booking createBooking(Booking booking) {
+    public Booking createBooking(@RequestBody Booking booking) {
+        System.out.println("Booking received: " + booking.toString());
         return bookingService.saveOrUpdate(booking);
     }
 

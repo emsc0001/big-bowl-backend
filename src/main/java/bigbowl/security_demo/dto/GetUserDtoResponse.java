@@ -24,5 +24,4 @@ public class GetUserDtoResponse {
         this.zipCode = zipCode;
     }
 
-    // getters and setters...
 }
