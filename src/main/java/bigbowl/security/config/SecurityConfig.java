@@ -104,6 +104,13 @@ public class SecurityConfig {
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/booking-activities/*")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/booking-activities/*")).hasAnyAuthority("ADMIN")
 
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/bookings")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/bookings/*")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/bookings")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/bookings/*")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/bookings/*")).hasAnyAuthority("ADMIN")
+
+
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/bestilling")).permitAll()
 
 

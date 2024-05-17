@@ -76,5 +76,10 @@ public class SetupDevUsers implements ApplicationRunner {
         specialUser.addRole(roleUser);
         specialUserRepository.save(specialUser);
 
+
+        SpecialUser woo12 = new SpecialUser("woo12",pwEncoder.encode(passwordUsedByAll),"123","Anders","Hansen","Lyngby vej 23","2800","Lyngby");
+        woo12.addRole(roleUser);
+        specialUserRepository.save(woo12);
+
     }
 }
