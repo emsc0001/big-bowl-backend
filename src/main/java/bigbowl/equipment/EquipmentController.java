@@ -1,8 +1,7 @@
 package bigbowl.equipment;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,4 +19,17 @@ public class EquipmentController {
     public List<Equipment> getAllEquipment() {
         return equipmentService.findAllEquipment();
     }
+
+
+@PutMapping("/{id}")
+public ResponseEntity<Equipment> updateEquipmentStatus(@PathVariable Long id, @RequestBody Equipment updatedEquipment) {
+    Equipment equipment = equipmentService.findEquipmentById(id);
+    if (equipment == null) {
+        return ResponseEntity.notFound().build();
+    }
+
+    equipment.setStatus(updatedEquipment.getStatus());
+    Equipment savedEquipment = equipmentService.saveEquipment(equipment);
+    return ResponseEntity.ok(savedEquipment);
+}
 }
