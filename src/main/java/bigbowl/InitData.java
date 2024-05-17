@@ -92,13 +92,27 @@ public class InitData implements CommandLineRunner {
 
         // Create some products
         Product product1 = new Product();
-        product1.setName("Product 1");
-        product1.setPrice(100.0);
+        product1.setName("Slik skål");
+        product1.setPrice(35.0);
+        product1.setImage("https://i.ibb.co/P6F4zdX/DALL-E-2024-05-17-15-30-31-A-colorful-candy-bowl-filled-with-a-variety-of-sweets-including-gummy-bea.webp");
         productRepository.save(product1);
+
+        Product product2 = new Product();
+        product2.setName("Chips skål");
+        product2.setPrice(45.0);
+        product2.setImage("https://i.ibb.co/hcT2fBb/DALL-E-2024-05-17-15-33-49-A-vibrant-top-down-view-of-a-glass-bowl-filled-with-assorted-chips-on-a-c.webp");
+        productRepository.save(product2);
+
+        Product product3 = new Product();
+        product3.setName("Drinks");
+        product3.setPrice(100.0);
+        product3.setImage("https://i.ibb.co/rFZvwG5/DALL-E-2024-05-17-15-34-33-A-vibrant-display-of-assorted-cocktails-on-a-bar-counter-The-scene-featur.webp");
+        productRepository.save(product3);
 
         Employee employee1 = new Employee();
         employee1.setName("Jude Bellingham");
         employee1.setRole(EmployeeRole.MANAGER);
+        employee1.setEmployeeImg("https://pbs.twimg.com/media/FtfoX_8XoAELrbg?format=jpg&name=900x900");
         employee1.setEmail("bellingoal@gmail.com");
         employee1.setPhone("12345678");
         employee1.setShift(Employee.ShiftType.MORNING);
@@ -106,9 +120,10 @@ public class InitData implements CommandLineRunner {
         employeeRepository.save(employee1);
 
         Employee employee2 = new Employee();
-        employee2.setName("Kylian Mbappe");
+        employee2.setName("Abdi Ox");
         employee2.setRole(EmployeeRole.MANAGER);
-        employee2.setEmail("mbappe@gmail.com");
+        employee2.setEmployeeImg("https://i2-prod.manchestereveningnews.co.uk/sport/football/article22735186.ece/ALTERNATES/s1200e/2_GettyImages-1357851686.jpg");
+        employee2.setEmail("Ox@gmail.com");
         employee2.setPhone("22222222");
         employee2.setShift(Employee.ShiftType.EVENING);
         setupShiftTimes(employee2, Employee.ShiftType.EVENING);
@@ -117,9 +132,9 @@ public class InitData implements CommandLineRunner {
 
         // Ticket Sellers (Total 4)
         Employee employee3 = new Employee();
-        employee3.setName("Lionel Messi");
+        employee3.setName("Ferland Fefe Mendy");
         employee3.setRole(EmployeeRole.TICKET_SELLER);
-        employee3.setEmail("messi@gmail.com");
+        employee3.setEmail("Fefe@gmail.com");
         employee3.setPhone("33333333");
         employee3.setShift(Employee.ShiftType.MORNING);
         setupShiftTimes(employee3, Employee.ShiftType.MORNING);

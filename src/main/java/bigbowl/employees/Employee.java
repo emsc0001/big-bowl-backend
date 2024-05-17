@@ -25,6 +25,7 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private EmployeeRole role;
 
+    private String employeeImg;
     private String email;
     private String phone;
 
