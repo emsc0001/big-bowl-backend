@@ -21,15 +21,15 @@ public class EquipmentController {
     }
 
 
-@PutMapping("/{id}")
-public ResponseEntity<Equipment> updateEquipmentStatus(@PathVariable Long id, @RequestBody Equipment updatedEquipment) {
-    Equipment equipment = equipmentService.findEquipmentById(id);
-    if (equipment == null) {
-        return ResponseEntity.notFound().build();
-    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Equipment> updateEquipmentStatus(@PathVariable Long id, @RequestBody Equipment updatedEquipment) {
+        Equipment equipment = equipmentService.findEquipmentById(id);
+        if (equipment == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-    equipment.setStatus(updatedEquipment.getStatus());
-    Equipment savedEquipment = equipmentService.saveEquipment(equipment);
-    return ResponseEntity.ok(savedEquipment);
-}
+        equipment.setStatus(updatedEquipment.getStatus());
+        Equipment savedEquipment = equipmentService.saveEquipment(equipment);
+        return ResponseEntity.ok(savedEquipment);
+    }
 }

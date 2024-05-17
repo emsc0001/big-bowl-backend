@@ -17,6 +17,7 @@ public class EquipmentService {
     public List<Equipment> findAllEquipment() {
         return equipmentRepository.findAll();
     }
+
     public Equipment findEquipmentById(Long id) {
         Optional<Equipment> optionalEquipment = equipmentRepository.findById(id);
         return optionalEquipment.orElse(null);
