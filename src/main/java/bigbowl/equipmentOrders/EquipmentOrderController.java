@@ -1,8 +1,7 @@
 package bigbowl.equipmentOrders;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +18,11 @@ public class EquipmentOrderController {
     @GetMapping
     public List<EquipmentOrder> getEquipmentOrders() {
         return equipmentOrderService.findAllEquipmentOrders();
+    }
+
+    @PostMapping
+    public ResponseEntity<EquipmentOrder> createEquipmentOrder(@RequestBody EquipmentOrder newEquipmentOrder) {
+        EquipmentOrder savedEquipmentOrder = equipmentOrderService.saveEquipmentOrder(newEquipmentOrder);
+        return ResponseEntity.ok(savedEquipmentOrder);
     }
 }
