@@ -49,6 +49,8 @@ private final BookingActivityRepository bookingActivityRepository;
             allBowlingLanes.removeAll(activity.getBowlingLanes());
         }
 
+        allBowlingLanes.removeIf(BowlingLane::isUnderMaintenance);
+
         return allBowlingLanes;
     }
 
