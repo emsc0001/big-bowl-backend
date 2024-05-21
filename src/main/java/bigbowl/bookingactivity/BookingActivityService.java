@@ -33,11 +33,11 @@ public class BookingActivityService {
 
     @Transactional
     public void deleteById(Long id) {
-        repository.deleteById(Math.toIntExact(id));
+        repository.deleteById(id);
     }
 
     public BookingActivity findById(Long id) {
-        return repository.findById(Math.toIntExact(id)).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     public List<BookingActivity> findAll() {
