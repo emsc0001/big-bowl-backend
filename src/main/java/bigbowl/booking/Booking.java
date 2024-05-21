@@ -32,6 +32,8 @@ public class Booking {
     @ManyToMany
     private List<Product> products;
 
+    private String phoneNumber;
+
     @Override
     public String toString() {
         return "Booking{" +

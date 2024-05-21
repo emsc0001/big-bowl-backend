@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/DinnerTable")
-public class DinnerTableController {
+public class  DinnerTableController {
     private final DinnerTableService dinnerTableService;
 
     public DinnerTableController(DinnerTableService dinnerTableService) {
