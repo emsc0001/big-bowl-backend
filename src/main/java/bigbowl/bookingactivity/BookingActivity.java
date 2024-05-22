@@ -4,6 +4,7 @@ import bigbowl.airhockeytable.AirHockeyTable;
 import bigbowl.booking.Booking;
 import bigbowl.bowlinglane.BowlingLane;
 import bigbowl.dinnertable.DinnerTable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,6 +42,7 @@ public class BookingActivity {
     private List<DinnerTable>  dinnerTables;
 
     // Reference til den booking, aktiviteten tilhører
+    @JsonIgnore
     @ManyToOne
     private Booking booking;
 }

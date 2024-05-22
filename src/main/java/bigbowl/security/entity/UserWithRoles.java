@@ -1,5 +1,6 @@
 package bigbowl.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,7 +50,6 @@ public class UserWithRoles implements UserDetails {
 
   @UpdateTimestamp
   private LocalDateTime edited;
-
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "user_roles",

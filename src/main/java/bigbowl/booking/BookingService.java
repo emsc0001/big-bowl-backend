@@ -50,7 +50,6 @@ public class BookingService {
                         existingActivity.setBooking(savedBooking);
                         existingActivity.setStartTime(activity.getStartTime());
                         existingActivity.setEndTime(activity.getEndTime());
-                        // Tilføj flere set metoder her for at opdatere andre felter i BookingActivity
 
                         // Gem det opdaterede BookingActivity objekt i databasen
                         BookingActivity savedActivity = bookingActivityRepository.save(existingActivity);
