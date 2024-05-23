@@ -5,6 +5,8 @@ import bigbowl.bookingactivity.BookingActivityRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
@@ -38,8 +40,15 @@ private final BookingActivityRepository bookingActivityRepository;
     }
 
     public List<BowlingLane> findAvailableBowlingLanes(LocalDateTime startTime, LocalDateTime endTime) {
+        // Konverter LocalDateTime til ZonedDateTime
+        ZoneId zoneId = ZoneId.of("Europe/Copenhagen"); // Erstat med din tidszone
+        ZonedDateTime zonedStartTime = startTime.atZone(zoneId);
+        ZonedDateTime zonedEndTime = endTime.atZone(zoneId);
+
         // Hent alle bookingaktiviteter, der overlapper med det angivne tidsrum
-        List<BookingActivity> overlappingActivities = bookingActivityRepository.findByStartTimeBetweenAndEndTimeBetween(startTime, endTime, startTime, endTime);
+        List<BookingActivity> overlappingActivities = bookingActivityRepository.findByStartTimeLessThanEqualAndEndTimeGreaterThanEqual(zonedEndTime.toLocalDateTime(), zonedStartTime.toLocalDateTime());
+
+        System.out.println("Overlapping activities: " + overlappingActivities);
 
         // Hent alle bowlingbaner
         List<BowlingLane> allBowlingLanes = bowlingLaneRepository.findAll();
@@ -53,5 +62,4 @@ private final BookingActivityRepository bookingActivityRepository;
 
         return allBowlingLanes;
     }
-
 }

@@ -39,7 +39,7 @@ public class AirHockeyTableService {
 
     public List<AirHockeyTable> findAvailableAirHockeyTables(LocalDateTime startTime, LocalDateTime endTime) {
         // Hent alle bookingaktiviteter, der overlapper med det angivne tidsrum
-        List<BookingActivity> overlappingActivities = bookingActivityRepository.findByStartTimeBetweenAndEndTimeBetween(startTime, endTime, startTime, endTime);
+        List<BookingActivity> overlappingActivities = bookingActivityRepository.findByStartTimeLessThanEqualAndEndTimeGreaterThanEqual(endTime, startTime);
 
         // Hent alle airhockeyborde
         List<AirHockeyTable> allAirHockeyTables = repository.findAll();

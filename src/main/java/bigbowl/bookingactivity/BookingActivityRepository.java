@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookingActivityRepository extends JpaRepository<BookingActivity, Long> {
-    List<BookingActivity> findByStartTimeBetweenAndEndTimeBetween(LocalDateTime startTime, LocalDateTime endTime, LocalDateTime startTime1, LocalDateTime endTime1);
+    List<BookingActivity> findByStartTimeLessThanEqualAndEndTimeGreaterThanEqual(LocalDateTime endTime, LocalDateTime startTime);
 
     List<BookingActivity> findByStartTimeBetween(LocalDateTime localDateTime, LocalDateTime localDateTime1);
 }

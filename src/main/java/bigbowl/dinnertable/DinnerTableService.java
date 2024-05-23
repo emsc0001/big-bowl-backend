@@ -36,7 +36,7 @@ public class DinnerTableService {
 
     public List<DinnerTable> findAvailableDinnerTables(LocalDateTime startTime, LocalDateTime endTime) {
         // Hent alle bookingaktiviteter, der overlapper med det angivne tidsrum
-        List<BookingActivity> overlappingActivities = bookingActivityRepository.findByStartTimeBetweenAndEndTimeBetween(startTime, endTime, startTime, endTime);
+        List<BookingActivity> overlappingActivities = bookingActivityRepository.findByStartTimeLessThanEqualAndEndTimeGreaterThanEqual(endTime, startTime);
 
         // Hent alle bowlingbaner
         List<DinnerTable> allDinnerTables = dinnerTableRepository.findAll();
