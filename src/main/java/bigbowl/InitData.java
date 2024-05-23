@@ -249,55 +249,19 @@ public class InitData implements CommandLineRunner {
         airHockeyTableRepository.save(airHockey6);
 
 // Create some Bowling Lanes
-        BowlingLane lane1 = new BowlingLane();
-        lane1.setLaneNumber(1);
-        lane1.setIsForKids(false);
-        bowlingLaneRepository.save(lane1);
+        for (int i = 1; i <= 24; i++) {
+            BowlingLane lane = new BowlingLane();
+            lane.setLaneNumber(i);
 
-        BowlingLane lane2 = new BowlingLane();
-        lane2.setLaneNumber(2);
-        lane2.setIsForKids(false);
-        bowlingLaneRepository.save(lane2);
+            // Sæt isForKids til true for baner 8 og derover
+            if (i >= 21) {
+                lane.setIsForKids(true);
+            } else {
+                lane.setIsForKids(false);
+            }
 
-        BowlingLane lane3 = new BowlingLane();
-        lane3.setLaneNumber(3);
-        lane3.setIsForKids(false);
-        bowlingLaneRepository.save(lane3);
-
-        BowlingLane lane4 = new BowlingLane();
-        lane4.setLaneNumber(4);
-        lane4.setIsForKids(false);
-        bowlingLaneRepository.save(lane4);
-
-        BowlingLane lane5 = new BowlingLane();
-        lane5.setLaneNumber(5);
-        lane5.setIsForKids(false);
-        bowlingLaneRepository.save(lane5);
-
-        BowlingLane lane6 = new BowlingLane();
-        lane6.setLaneNumber(6);
-        lane6.setIsForKids(false);
-        bowlingLaneRepository.save(lane6);
-
-        BowlingLane lane7 = new BowlingLane();
-        lane7.setLaneNumber(7);
-        lane7.setIsForKids(false);
-        bowlingLaneRepository.save(lane7);
-
-        BowlingLane lane8 = new BowlingLane();
-        lane8.setLaneNumber(8);
-        lane8.setIsForKids(true);
-        bowlingLaneRepository.save(lane8);
-
-        BowlingLane lane9 = new BowlingLane();
-        lane9.setLaneNumber(9);
-        lane9.setIsForKids(true);
-        bowlingLaneRepository.save(lane9);
-
-        BowlingLane lane10 = new BowlingLane();
-        lane10.setLaneNumber(10);
-        lane10.setIsForKids(true);
-        bowlingLaneRepository.save(lane10);
+            bowlingLaneRepository.save(lane);
+        }
 
 
         // Create some dinner tables
@@ -321,30 +285,6 @@ public class InitData implements CommandLineRunner {
         DinnerTable table5 = new DinnerTable();
         table5.setTableNumber(5);
         dinnerTableRepository.save(table5);
-/*
-        // Create a new booking activity
-        BookingActivity activity1 = new BookingActivity();
-        activity1.setStartTime(LocalDateTime.now());
-        activity1.setEndTime(LocalDateTime.now().plusHours(2));
-        activity1.setActivityType("Bowling");
-        activity1.setBowlingLanes(Arrays.asList(lane1));
-        activity1.setDinnerTables(Arrays.asList(table1));
-
-        // Save the booking activity
-        bookingActivityRepository.save(activity1);
-
-
-
-        // Create a booking and associate with the activity
-        Booking booking1 = new Booking();
-        booking1.setActivities(Arrays.asList(activity1));
-        booking1.setProducts(Arrays.asList(product1));
-
-        bookingRepository.save(booking1);
-
-
-
- */
 
 
     }

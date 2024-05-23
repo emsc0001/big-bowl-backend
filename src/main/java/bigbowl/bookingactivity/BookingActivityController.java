@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -51,5 +52,18 @@ public class BookingActivityController {
     public ResponseEntity<Void> deleteActivity(@PathVariable Long id) {
         bookingActivityService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/book-whole-day")
+    public ResponseEntity<String> bookWholeDayForBowlingLanes(@RequestParam String date) {
+        try {
+            LocalDate bookingDate = LocalDate.parse(date);
+            bookingActivityService.bookWholeDayForBowlingLanes(bookingDate);
+            return ResponseEntity.ok("The whole day has been booked for bowling lanes");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid date format");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Server error: " + e.getMessage());
+        }
     }
 }
