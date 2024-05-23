@@ -3,6 +3,8 @@ package bigbowl.booking;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {
@@ -20,6 +22,11 @@ public class BookingController {
     @GetMapping("/{id}")
     public Booking getBookingById(@PathVariable Long id) {
         return bookingService.findById(id);
+    }
+
+    @GetMapping("/user/{username}")
+    public List<Booking> getBookingsByUsername(@PathVariable String username) {
+        return bookingService.findBookingsByUsername(username);
     }
 
     @PostMapping

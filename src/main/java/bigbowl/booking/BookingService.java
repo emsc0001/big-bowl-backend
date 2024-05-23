@@ -8,6 +8,8 @@ import org.hibernate.PersistentObjectException;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookingService {
     private final BookingRepository repository;
@@ -70,6 +72,11 @@ public class BookingService {
     public void deleteById(Long id) {
         repository.deleteById(Math.toIntExact(id));
     }
+
+    public List<Booking> findBookingsByUsername(String username) {
+        return (List<Booking>) repository.findByUserUsernameIgnoreCase(username);
+    }
+
 
     public Booking findById(Long id) {
         return repository.findById(Math.toIntExact(id)).orElse(null);
