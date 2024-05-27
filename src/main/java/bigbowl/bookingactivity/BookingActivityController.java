@@ -18,7 +18,7 @@ public class BookingActivityController {
         this.bookingActivityService = bookingActivityService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<BookingActivity>> getAllActivities() {
         List<BookingActivity> activities = bookingActivityService.findAll();
         return ResponseEntity.ok(activities);
