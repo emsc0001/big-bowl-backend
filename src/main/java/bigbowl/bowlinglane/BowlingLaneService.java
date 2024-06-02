@@ -4,6 +4,7 @@ import bigbowl.bookingactivity.BookingActivity;
 import bigbowl.bookingactivity.BookingActivityRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -60,6 +61,16 @@ private final BookingActivityRepository bookingActivityRepository;
 
         allBowlingLanes.removeIf(BowlingLane::isUnderMaintenance);
 
+        // Hvis det aktuelle tidspunkt er mellem kl. 10-17, fjern de baner, der er reserveret til klubben, og returner kun de første 10 tilgængelige baner
+        if (startTime.getHour() >= 10 && endTime.getHour() <= 17 && !(startTime.getDayOfWeek() == DayOfWeek.SATURDAY || startTime.getDayOfWeek() == DayOfWeek.SUNDAY)) {
+            List<BowlingLane> clubReservedLanes = bowlingLaneRepository.findAll().subList(0, 14);
+            allBowlingLanes.removeAll(clubReservedLanes);
+            return allBowlingLanes.subList(0, Math.min(allBowlingLanes.size(), 10));
+        }
+
+        // Hvis det aktuelle tidspunkt er uden for kl. 10-17, returner alle tilgængelige baner
         return allBowlingLanes;
     }
+
+
 }
