@@ -2,7 +2,7 @@ package bigbowl.booking;
 
 import bigbowl.bookingactivity.BookingActivity;
 import bigbowl.bookingactivity.BookingActivityRepository;
-import bigbowl.bowlinglane.BowlinLaneRepository;
+import bigbowl.bowlinglane.BowlingLaneRepository;
 import bigbowl.bowlinglane.BowlingLane;
 import bigbowl.security_demo.entity.SpecialUser;
 import bigbowl.security_demo.repository.SpecialUserRepository;
