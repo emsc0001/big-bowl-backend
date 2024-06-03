@@ -23,6 +23,7 @@ public class CorsConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true); // Tillad credentials
 
         configuration.setAllowedOriginPatterns(Arrays.asList(ALLOWED_ORIGINS));
 
