@@ -40,6 +40,25 @@ public class BowlingLaneControllerTest {
     }
 
     @Test
+    void getBowlingLaneById() throws Exception {
+        Long laneId = 1L;
+        BowlingLane expectedLane = new BowlingLane(laneId, 1, true, false);
+
+        // Arrange
+        Mockito.when(bowlingLaneService.findById(laneId)).thenReturn(expectedLane);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/BowlingLanes/" + laneId)
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(expectedLane.getId().intValue())))
+                .andExpect(jsonPath("$.laneNumber", is(expectedLane.getLaneNumber())))
+                .andExpect(jsonPath("$.forKids", is(expectedLane.isForKids())))
+                .andExpect(jsonPath("$.underMaintenance", is(expectedLane.isUnderMaintenance())));
+    }
+
+
+    @Test
     void createBowlingLane() throws Exception {
         // Arrange
         Mockito.when(bowlingLaneService.saveOrUpdate(Mockito.any(BowlingLane.class))).thenReturn(bowlingLane);
@@ -64,7 +83,7 @@ public class BowlingLaneControllerTest {
     @Test
     void updateBowlingLane() throws Exception {
         // Arrange
-        Long laneId = 1L; 
+        Long laneId = 1L;
         bowlingLane.setLaneNumber(2);
         bowlingLane.setUnderMaintenance(true);
 
@@ -81,4 +100,20 @@ public class BowlingLaneControllerTest {
                 .andExpect(jsonPath("$.forKids", is(bowlingLane.isForKids())))
                 .andExpect(jsonPath("$.underMaintenance", is(bowlingLane.isUnderMaintenance())));
     }
+
+    @Test
+    void deleteBowlingLane() throws Exception {
+        Long laneId = 1L;
+
+        Mockito.doNothing().when(bowlingLaneService).deleteById(laneId);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.delete("/BowlingLanes/" + laneId)
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
+                .andExpect(status().isOk());
+
+
+        Mockito.verify(bowlingLaneService, Mockito.times(1)).deleteById(laneId);
+    }
+
 }
