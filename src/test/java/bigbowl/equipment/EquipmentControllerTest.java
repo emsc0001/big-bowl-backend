@@ -32,10 +32,8 @@ class EquipmentControllerTest {
         objectMapper = new ObjectMapper();
         equipment = new Equipment();
         equipment.setId(1);
-        equipment.setName("Ball");
-        equipment.setType("Sports");
+        equipment.setName("Bowling Ball");
         equipment.setStatus("Operational");
-        equipment.setAdditionalDetails("Standard size");
     }
 
     @Test
