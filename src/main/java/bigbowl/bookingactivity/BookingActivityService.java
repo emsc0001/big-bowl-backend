@@ -2,11 +2,14 @@ package bigbowl.bookingactivity;
 
 import bigbowl.bowlinglane.BowlingLane;
 import bigbowl.bowlinglane.BowlingLaneRepository;
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -68,5 +71,24 @@ public class BookingActivityService {
         activity.setBowlingLanes(bowlingLanes);
 
         repository.save(activity);
+    }
+
+
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void bookForBowlingClubs() {
+        List<BowlingLane> lanes = bowlingLaneRepository.findAll().subList(0, 14);
+        LocalDate date = LocalDate.now(); // Startdato for bookinger
+        for (DayOfWeek day : DayOfWeek.values()) {
+            if (day.equals(DayOfWeek.SATURDAY) || day.equals(DayOfWeek.SUNDAY)) {
+                continue;
+            }
+            LocalDate bookingDate = date.with(day); // Dato for booking
+            BookingActivity activity = new BookingActivity();
+            activity.setStartTime(bookingDate.atTime(10, 0));
+            activity.setEndTime(bookingDate.atTime(17, 0));
+            activity.setActivityType("Bowling");
+            activity.setBowlingLanes(lanes);
+            repository.save(activity);
+        }
     }
 }
