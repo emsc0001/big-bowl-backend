@@ -31,7 +31,7 @@ public class BowlingLaneControllerTest {
     private BowlingLane bowlingLane;
 
     @BeforeEach
-    void setUp() {
+    void setUpCreate() {
         objectMapper = new ObjectMapper();
         bowlingLane = new BowlingLane();
         bowlingLane.setLaneNumber(1);
@@ -50,6 +50,33 @@ public class BowlingLaneControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(bowlingLane)))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.laneNumber", is(bowlingLane.getLaneNumber())))
+                .andExpect(jsonPath("$.forKids", is(bowlingLane.isForKids())))
+                .andExpect(jsonPath("$.underMaintenance", is(bowlingLane.isUnderMaintenance())));
+    }
+
+    @BeforeEach
+    void setUpUpdate() {
+        objectMapper = new ObjectMapper();
+        bowlingLane = new BowlingLane(1L, 1, true, false);
+    }
+
+    @Test
+    void updateBowlingLane() throws Exception {
+        // Arrange
+        Long laneId = 1L; 
+        bowlingLane.setLaneNumber(2);
+        bowlingLane.setUnderMaintenance(true);
+
+        Mockito.when(bowlingLaneService.saveOrUpdate(Mockito.any(BowlingLane.class))).thenReturn(bowlingLane);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.put("/BowlingLanes/" + laneId)
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER")))  // Mock JWT token with authority
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(bowlingLane)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(bowlingLane.getId().intValue())))
                 .andExpect(jsonPath("$.laneNumber", is(bowlingLane.getLaneNumber())))
                 .andExpect(jsonPath("$.forKids", is(bowlingLane.isForKids())))
                 .andExpect(jsonPath("$.underMaintenance", is(bowlingLane.isUnderMaintenance())));
